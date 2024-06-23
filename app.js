@@ -16,8 +16,9 @@ http.createServer((request, response) => {
         });
     } else {
         const filename = request.url == '/'
-            ? './www/index.html'
-            : `./WWW/${request.url}`;
+            ? './WWW/index.html'
+            : `./WWW${request.url}`;
+        console.log("./WWW/index.html", "./WWW/index.html" == filename, filename)
         fs.readFile(filename, (err, data) => {
             if (err) {
                 response.writeHead(404, { "Content-Type": "text/plain" });
@@ -31,6 +32,12 @@ http.createServer((request, response) => {
                         break;
                     case 'html':
                         response.writeHead(200, { "Content-Type": "text/html" });
+                        break;
+                    case 'css':
+                        response.writeHead(200, { "Content-Type": "text/css" });
+                        break;
+                    case 'js':
+                        response.writeHead(200, { "Content-Type": "text/javascript" });
                         break;
                     case 'jpeg':
                         response.writeHead(200, { "Content-Type": "image/jpeg" });
